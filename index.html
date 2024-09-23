@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Documentation: Nudge Creation</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; margin: 20px; }
+        h1, h2, h3 { color: #333; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        table, th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+        th { background-color: #f4f4f4; }
+        pre { background-color: #f4f4f4; padding: 10px; border: 1px solid #ccc; overflow: auto; }
+    </style>
+</head>
+<body>
+
+<h1>API Documentation: Nudge Creation</h1>
+
+<h2>Overview</h2>
+<p>This API allows users to create, update, retrieve, and delete nudges.</p>
+
+<h2>Base URL</h2>
+<pre>https://api.example.com/nudges</pre>
+
+<h2>Object Data Model: Nudge</h2>
+
+<table>
+    <tr>
+        <th>Widget</th>
+        <th>Request Type</th>
+        <th>Base URL</th>
+        <th>API Endpoint</th>
+        <th>Payload</th>
+    </tr>
+    <tr>
+        <td>Nudge</td>
+        <td>GET</td>
+        <td>/nudges</td>
+        <td>/nudges</td>
+        <td>-</td>
+    </tr>
+    <tr>
+        <td>Nudge</td>
+        <td>GET</td>
+        <td>/nudges</td>
+        <td>/nudges/{id}</td>
+        <td>-</td>
+    </tr>
+    <tr>
+        <td>Nudge</td>
+        <td>POST</td>
+        <td>/nudges</td>
+        <td>/nudges</td>
+        <td>tagged_event, title, image_url, scheduled_date, start_time, end_time, description, icon, invitation</td>
+    </tr>
+    <tr>
+        <td>Nudge</td>
+        <td>PUT</td>
+        <td>/nudges</td>
+        <td>/nudges/{id}</td>
+        <td>Same as POST payload</td>
+    </tr>
+    <tr>
+        <td>Nudge</td>
+        <td>DELETE</td>
+        <td>/nudges</td>
+        <td>/nudges/{id}</td>
+        <td>-</td>
+    </tr>
+</table>
+
+<h2>API Endpoints</h2>
+
+<h3>1. Create a Nudge</h3>
+<p><strong>Endpoint:</strong> <code>/nudges</code></p>
+<p><strong>Method:</strong> <code>POST</code></p>
+<p><strong>Description:</strong> Creates a new nudge.</p>
+
+<h4>Request Payload:</h4>
+<pre>
+{
+  "tagged_event": "event_12345",
+  "title": "New Workshop Event",
+  "image_url": "https://example.com/images/workshop.png",
+  "scheduled_date": "24/09/2024",
+  "start_time": "10:00",
+  "end_time": "11:30",
+  "description": "Join us for an insightful workshop on technology trends.",
+  "icon": "https://example.com/icons/workshop_icon.png",
+  "invitation": "Swipe right to join our workshop!"
+}
+</pre>
+
+<h4>Response:</h4>
+<p><strong>200 OK:</strong> Nudge created successfully</p>
+<p><strong>400 Bad Request:</strong> Invalid input data</p>
+
+<h4>Response Body:</h4>
+<pre>
+{
+  "id": "nudge_67890",
+  "tagged_event": "event_12345",
+  "title": "New Workshop Event",
+  "image_url": "https://example.com/images/workshop.png",
+  "scheduled_date": "24/09/2024",
+  "start_time": "10:00",
+  "end_time": "11:30",
+  "description": "Join us for an insightful workshop on technology trends.",
+  "icon": "https://example.com/icons/workshop_icon.png",
+  "invitation": "Swipe right to join our workshop!",
+  "created_at": "23/09/2024T12:00:00Z",
+  "updated_at": "23/09/2024T12:00:00Z"
+}
+</pre>
+
+<h3>2. Retrieve All Nudges</h3>
+<p><strong>Endpoint:</strong> <code>/nudges</code></p>
+<p><strong>Method:</strong> <code>GET</code></p>
+<p><strong>Description:</strong> Fetches all created nudges.</p>
+
+<h4>Response:</h4>
+<p><strong>200 OK:</strong> List of nudges retrieved successfully</p>
+
+<h4>Response Body:</h4>
+<pre>
+[
+  {
+    "id": "nudge_67890",
+    "tagged_event": "event_12345",
+    "title": "New Workshop Event",
+    "image_url": "https://example.com/images/workshop.png",
+    "scheduled_date": "24/09/2024",
+    "start_time": "10:00",
+    "end_time": "11:30",
+    "description": "Join us for an insightful workshop on technology trends.",
+    "icon": "https://example.com/icons/workshop_icon.png",
+    "invitation": "Swipe right to join our workshop!"
+  },
+  {
+    "id": "nudge_54321",
+    "tagged_event": "article_98765",
+    "title": "Latest Tech Updates",
+    "image_url": "https://example.com/images/tech.png",
+    "scheduled_date": "25/09/2024",
+    "start_time": "12:00",
+    "end_time": "13:00",
+    "description": "Catch up with the latest in the world of technology.",
+    "icon": "https://example.com/icons/tech_icon.png",
+    "invitation": "Swipe right to explore!"
+  }
+]
+</pre>
+
+<h3>3. Retrieve a Specific Nudge</h3>
+<p><strong>Endpoint:</strong> <code>/nudges/{id}</code></p>
+<p><strong>Method:</strong> <code>GET</code></p>
+<p><strong>Description:</strong> Retrieves details for a specific nudge by its ID.</p>
+
+<h4>Response:</h4>
+<p><strong>200 OK:</strong> Nudge retrieved successfully</p>
+<p><strong>404 Not Found:</strong> Nudge not found</p>
+
+<h4>Response Body:</h4>
+<pre>
+{
+  "id": "nudge_67890",
+  "tagged_event": "event_12345",
+  "title": "New Workshop Event",
+  "image_url": "https://example.com/images/workshop.png",
+  "scheduled_date": "24/09/2024",
+  "start_time": "10:00",
+  "end_time": "11:30",
+  "description": "Join us for an insightful workshop on technology trends.",
+  "icon": "https://example.com/icons/workshop_icon.png",
+  "invitation": "Swipe right to join our workshop!"
+}
+</pre>
+
+<h3>4. Update a Nudge</h3>
+<p><strong>Endpoint:</strong> <code>/nudges/{id}</code></p>
+<p><strong>Method:</strong> <code>PUT</code></p>
+<p><strong>Description:</strong> Updates an existing nudge with new details.</p>
+
+<h4>Request Payload:</h4>
+<pre>
+{
+  "tagged_event": "event_54321",
+  "title": "Updated Workshop Event",
+  "image_url": "https://example.com/images/new_workshop.png",
+  "scheduled_date": "26/09/2024",
+  "start_time": "14:00",
+  "end_time": "15:30",
+  "description": "Join us for an updated workshop on new technology trends.",
+  "icon": "https://example.com/icons/new_icon.png",
+  "invitation": "Swipe right to join the updated event!"
+}
+</pre>
+
+<h4>Response:</h4>
+<p><strong>200 OK:</strong> Nudge updated successfully</p>
+<p><strong>404 Not Found:</strong> Nudge not found</p>
+<p><strong>400 Bad Request:</strong> Invalid data</p>
+
+<h4>Response Body:</h4>
+<pre>
+{
+  "id": "nudge_67890",
+  "tagged_event": "event_54321",
+  "title": "Updated Workshop Event",
+  "image_url": "https://example.com/images/new_workshop.png",
+  "scheduled_date": "26/09/2024",
+  "start_time": "14:00",
+  "end_time": "15:30",
+  "description": "Join us for an updated workshop on new technology trends.",
+  "icon": "https://example.com/icons/new_icon.png",
+  "invitation": "Swipe right to join the updated event!",
+  "updated_at": "24/09/2024T14:00:00Z"
+}
+</pre>
+
+<h3>5. Delete a Nudge</h3>
+<p><strong>Endpoint:</strong> <code>/nudges/{id}</code></p>
+<p><strong>Method:</strong> <code>DELETE</code></p>
+<p><strong>Description:</strong> Deletes a specific nudge by its ID.</p>
+
+<h4>Response:</h4>
+<p><strong>204 No Content:</strong> Nudge deleted successfully</p>
+<p><strong>404 Not Found:</strong> Nudge not found</p>
+
+<h2>Error Codes</h2>
+<ul>
+    <li><strong>400:</strong> Bad Request – Invalid input data</li>
+    <li><strong>404:</strong> Not Found – Nudge with the specified ID not found</li>
+    <li><strong>500:</strong> Internal Server Error – Server encountered an error while processing the request</li>
+</ul>
+
+<h2>Notes</h2>
+<ul>
+    <li>The <code>tagged_event</code> field refers to the event or article ID associated with the nudge.</li>
+    <li>The API requires image URLs and icons to be uploaded to a separate image hosting service.</li>
+    <li>The scheduled time format is <code>hh:mm</code> and date is in <code>dd/mm/yy</code>.</li>
+    <li>CRUD functionalities are fully supported for managing nudges.</li>
+</ul>
+
+</body>
+</html>
